@@ -35,7 +35,7 @@
 	    }
 	    catch (SQLException e)
 	    {
-	    	if(e.getErrorCode() == 1062) //Looks like mysql is throwing 1062 error code for duplicate primary key
+	    	if(e.getErrorCode() == 1062) //Looks like mysql is throwing 1062 error code for Duplicate Primary Key
 	    		{
 	 %>
 	    	

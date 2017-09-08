@@ -8,9 +8,11 @@
 </head>
 <body>
 <form action = "SignIn2.jsp" method="post">
-	Username : <input type = "text" name = "username"><br>
-	Password : <input type = "password" name = "password"><br>
-	<input type="submit" value="Sign In!">
+	<pre>
+		Username : <input type = "text" name = "username"/>
+		Password : <input type = "password" name = "password"/>
+		<input type="submit" value="Sign In!"/>
+	</pre>
 </form>
 </body>
 </html>

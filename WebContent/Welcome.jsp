@@ -7,7 +7,7 @@
 <title>Welcome</title>
 </head>
 <body>
-HEY!!!
-You made it!
+	<center><h3><b>Welcome page css</b></h3></center>
+	<a href = "http://localhost:8080/Mini/Assignments.jsp">Assignments</a>
 </body>
 </html>

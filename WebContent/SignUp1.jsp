@@ -12,6 +12,9 @@
 	E-Mail ID : <input type = "text" name = "email"><br>
 	Username : <input type = "text" name = "username"><br>
 	Password : <input type = "password" name = "password"><br>
+	Designation : <input type = "radio" name = "designation" value = "teacher">Teacher
+				<input type = "radio" name = "designation" value = "student" >Student<br>
+				
 	<input type="submit" value="Sign Up!">
 </form>
 </body>

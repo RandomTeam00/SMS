@@ -22,10 +22,11 @@
 	    String name= request.getParameter("name"); 
 	    String email= request.getParameter("email"); 
 	    String uname= request.getParameter("username"); 
-	    String pass= request.getParameter("password"); 
+	    String pass= request.getParameter("password");
+	    String designation= request.getParameter("designation");
 	    
 	    try{
-	    String query = String.format("insert into registrations values (\"%s\",\"%s\",\"%s\",\"%s\")",name,email,uname,pass);
+	    String query = String.format("insert into registrations values (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")",name,email,uname,pass,designation);
 	    System.out.println(query);
 		PreparedStatement ps =conn.prepareStatement(query);
 		ps.execute();
@@ -54,12 +55,14 @@
     Email entered : <%=request.getParameter("email")%><br>
     Username entered : <%=request.getParameter("username")%><br>
     Password entered : <%=request.getParameter("password")%><br>
+    Designation entered : <%=request.getParameter("designation")%><br>
       
       <% 
       	System.out.println(name); 
        	System.out.println(email);
        	System.out.println(uname);
        	System.out.println(pass);
+       	System.out.println(designation);
       %>
      
 </body>

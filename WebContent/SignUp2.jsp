@@ -58,13 +58,15 @@
 	    		System.out.println("Some Error");
 	    }
     %>
-    
+    <h2>Your Credentials :</h2>
     Name entered : <%=request.getParameter("name")%><br>
     Email entered : <%=request.getParameter("email")%><br>
     Username entered : <%=request.getParameter("username")%><br>
     Password entered : <%=request.getParameter("password")%><br>
     Designation entered : <%=request.getParameter("designation")%><br>
-      
+    
+    
+    <h5><a href=http://localhost:8080/Mini/SignIn1.jsp>Sign in</a></h5>  
       <% 
       	System.out.println(name); 
        	System.out.println(email);

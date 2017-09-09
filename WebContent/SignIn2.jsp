@@ -28,15 +28,16 @@
 	    
 	    
 	  try{
-	    String query = String.format("select username,password from registrations where username = \"%s\";",uname);
+	    String query = String.format("select username,password,designation from registrations where username = \"%s\";",uname);
 	    System.out.println(query);
 		PreparedStatement ps =conn.prepareStatement(query);
 		ResultSet rs = ps.executeQuery(query);
-		String pa="",un="";
+		String pa="",un="",de="";
 		if(rs.next())
 		{	
 			pa = rs.getString("password");
 			un = rs.getString("username");
+			de = rs.getString("designation");
 		}
 		System.out.println("DB : "+un+" "+pa);
 		System.out.println("USER : "+uname+" "+pass);
@@ -44,9 +45,14 @@
 		if(pass.equals(pa) && uname.equals(un))
 		{
 			System.out.println("Sign In successful");
-			%>
-				<jsp:forward page="StudentWelcome.jsp"/>
-			<% 
+			if(de.equals("student")){
+					%>
+						<jsp:forward page="StudentWelcome.jsp"/>
+					<%}
+			else if(de.equals("teacher")){
+					%>
+						<jsp:forward page="TeacherWelcome.jsp"/>
+					<%}
 		}
 		else
 		{

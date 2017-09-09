@@ -31,6 +31,14 @@
 		PreparedStatement ps =conn.prepareStatement(query);
 		ps.execute();
 		
+		if(designation.equalsIgnoreCase("student"))
+		{
+			query = String.format("insert into student values (\"%s\",\"%s\")",uname,name);
+		    System.out.println(query);
+			ps =conn.prepareStatement(query);
+			ps.execute();
+		}
+		
 		ps.close();
 		conn.close();
 	    }

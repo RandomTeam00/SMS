@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ page import = "aA.Test" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,6 +24,7 @@
 	    
 		String uname= request.getParameter("username"); 
 	    String pass= request.getParameter("password");
+	    Test.userName=uname;
 	    
 	    
 	  try{
@@ -42,7 +45,7 @@
 		{
 			System.out.println("Sign In successful");
 			%>
-				<jsp:forward page="Welcome.jsp"/>
+				<jsp:forward page="StudentWelcome.jsp"/>
 			<% 
 		}
 		else

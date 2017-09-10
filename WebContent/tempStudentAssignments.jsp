@@ -40,7 +40,7 @@ Redirecting...
 	}
 	
 	conn.close();
-	Thread.sleep(2000);
+	//Thread.sleep(2000);
 %>
 
 	<jsp:forward page="StudentAssignments.jsp"/>

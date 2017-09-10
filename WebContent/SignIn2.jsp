@@ -15,7 +15,9 @@
     <%@ page import = "java.sql.*" %>  
     
 	<% 	    
-	    String driver = "com.mysql.jdbc.Driver";
+	    Test.__init__();
+		
+		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/Mini"; //test is the db name. 3306 is the default port
 		String username = "root"; //username to db
 		String password = "123"; //password to db

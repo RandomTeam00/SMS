@@ -14,6 +14,15 @@ The time on the server is <%= new java.util.Date() %>
 <br>
 <br>
 <% Test.yo(); System.out.println("\tHW1"); Test.incA();%>
+<form action = "HelloWorld2.jsp" method="post">
+	<select name="<%="ff"+3 %>">
+		<option value = "nsub">Not Submitted</option>
+		<option value = "sub">Submitted</option>
+	</select>
+	
+	<input type="submit" value="Submit"/>
+</form>
+
 
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Assignments</title>
+<title>Student's Assignments</title>
 </head>
 <body>
 	<center><h3><b>Assignment page css</b></h3></center>
@@ -19,6 +19,7 @@
 		Connection conn = DriverManager.getConnection(url,username,password);
 		
 		System.out.println("YO");
+		Test.currentAssignmentCount = 0;
 		System.out.println("Test.currentAssignmentCount : "+Test.currentAssignmentCount);
 		
 		String query = "select column_name from information_schema.columns where table_name='student'";
@@ -52,13 +53,15 @@
 			 }
 			 i++;
 		}
-
+System.out.println("DONE");
 	%>
-	
+<form action = "tempStudentAssignments.jsp" method="post">	
 <table>
 <tr>
+<th>Sr.No.</th>
 <th>Assignment</th>
 <th>Status</th>
+<th>Input</th>
 </tr>
 	<%
 		for (i =0; i < Test.currentAssignmentCount ; i++)
@@ -66,8 +69,15 @@
 	
 	%>
 		<tr>
-		<td> <%=Test.assignments[i]%></td>
-		<td><%=Test.status[i]%> </td>
+		<td align="center"> <%=i+1%></td>
+		<td align="center"> <%=Test.assignments[i]%></td>
+		<td align="center"><%=Test.status[i]%> </td>
+		<td align="center">
+			<select name = "<%="input"+i %>">
+				<option value = "NS">Not Submitted</option>
+				<option value = "S">Submitted</option>
+			</select>
+		</td>
 		</tr>
 		
 	<%       
@@ -75,6 +85,7 @@
 	%>
 
 </table>
-	
+<input type="submit" value="Update"/>
+</form>	
 </body>
 </html>

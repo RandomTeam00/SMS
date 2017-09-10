@@ -8,7 +8,9 @@
 </head>
 <body>
 	<center><h3><b>Teacher Welcome page css</b></h3></center>
-	<a href = "http://localhost:8080/Mini/Assignments.jsp">Assignments</a>
+	<a href= "http://localhost:8080/Mini/ListOfAssignments.jsp">Ongoing Assignment List</a><br>
+	<a href = "http://localhost:8080/Mini/TeacherAssignments1.jsp">New Assignment</a><br>
+	<a href = "http://localhost:8080/Mini/TeacherAssignments3.jsp">Review Assignment</a><br>
 	<!-- select column_name from information_schema.columns where table_name='student'; -->
 
 </body>

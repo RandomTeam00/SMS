@@ -12,10 +12,33 @@
 	E-Mail ID : <input type = "text" name = "email"><br>
 	Username : <input type = "text" name = "username"><br>
 	Password : <input type = "password" name = "password"><br>
-	Designation : <input type = "radio" name = "designation" value = "teacher">Teacher
-				<input type = "radio" name = "designation" value = "student" >Student<br>
+	Designation : <select name = "designation" onchange="yesnoCheck(this);">
+				    <option value="student">Student</option>
+				    <option value="teacher">Teacher</option>
+			      </select>
+			
+			    <div id="ifYes" style="display: none;">
+			    	<label for="subject">Subject : </label> <select name = "subject" id = "subject">
+															    <option value="toc">ToC</option>
+															    <option value="dbms">DBMS</option>
+															    <option value="sepm">SEPM</option>
+															    <option value="isee">ISEE</option>
+															    <option value="cn">CN</option>
+													      	</select>
+				</div>
+			    
+			    <script>
+				    function yesnoCheck(that) {
+				        if (that.value == "teacher") {
+				            //alert("check");
+				            document.getElementById("ifYes").style.display = "block";
+				        } else {
+				            document.getElementById("ifYes").style.display = "none";
+				        }
+				    }
+				</script>
 				
-	<input type="submit" value="Sign Up!">
+	<br/><br/><br/><input type="submit" value="Sign Up!">
 </form>
 </body>
 </html>

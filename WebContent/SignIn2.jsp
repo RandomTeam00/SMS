@@ -28,20 +28,21 @@
 	    
 	    
 	  try{
-	    String query = String.format("select username,password,designation from registrations where username = \"%s\";",uname);
+	    String query = String.format("select username,password,designation,subject from registrations where username = \"%s\";",uname);
 	    System.out.println(query);
 		PreparedStatement ps =conn.prepareStatement(query);
 		ResultSet rs = ps.executeQuery(query);
-		String pa="",un="",de="";
+		String pa="",un="",de="",su="";
 		if(rs.next())
 		{	
 			pa = rs.getString("password");
 			un = rs.getString("username");
 			de = rs.getString("designation");
+			su = rs.getString("subject");
 		}
 		System.out.println("DB : "+un+" "+pa);
 		System.out.println("USER : "+uname+" "+pass);
-		
+		Test.subject=su;
 		if(pass.equals(pa) && uname.equals(un))
 		{
 			System.out.println("Sign In successful");

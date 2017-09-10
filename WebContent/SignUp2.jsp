@@ -24,24 +24,39 @@
 	    String uname= request.getParameter("username"); 
 	    String pass= request.getParameter("password");
 	    String designation= request.getParameter("designation");
-	    
-	    try{
-	    String query = String.format("insert into registrations values (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")",name,email,uname,pass,designation);
-	    System.out.println(query);
-		PreparedStatement ps =conn.prepareStatement(query);
-		ps.execute();
-		
-		if(designation.equalsIgnoreCase("student"))
-		{
-			query = String.format("insert into student values (\"%s\",\"%s\")",uname,name);
-		    System.out.println(query);
-			ps =conn.prepareStatement(query);
-			ps.execute();
-		}
-		
-		ps.close();
-		conn.close();
+	    String subject= "N/A";
+	    if(designation.equals("teacher"))
+	    {
+	    	subject = request.getParameter("subject");
 	    }
+	    
+	    try
+	    {
+		    String query = String.format("insert into registrations values (\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")",name,email,uname,pass,designation,subject);
+		    System.out.println(query);
+			PreparedStatement ps =conn.prepareStatement(query);
+			ps.execute();
+			
+			if(designation.equalsIgnoreCase("student"))
+			{
+				query = String.format("insert into student values (\"%s\",\"%s\")",uname,name);
+			    System.out.println(query);
+			    PreparedStatement ps1 =conn.prepareStatement(query);
+				ps1.execute();
+				ps1.close();
+			}
+			
+			else if(designation.equalsIgnoreCase("teacher"))
+			{
+				query = String.format("insert into teacher values (\"%s\",\"%s\",\"%s\")",uname,name,subject);
+			    System.out.println(query);
+			    PreparedStatement ps2 =conn.prepareStatement(query);
+				ps2.execute();
+				ps2.close();
+			}
+			ps.close();
+			conn.close();
+	  	}
 	    catch (SQLException e)
 	    {
 	    	if(e.getErrorCode() == 1062) //Looks like mysql is throwing 1062 error code for Duplicate Primary Key

@@ -23,35 +23,57 @@
 		String query;
 	    PreparedStatement ps;
 	    ResultSet rs;
-		
-		String subject = request.getParameter("subject"); 
-	    String title = request.getParameter("title");
-	    String duedate = request.getParameter("duedate"); 
-	    String description = request.getParameter("description");
-	    //SOMETHING TO DO WITH THE ATTACHED FILE
-	    
+			    
 	    /*
-	    	1. Add this assignmnet to the assignments table
-	    	2. Add a column to the "student" table and set status to not submitted.
+	    	1. Look at all the submitted assignments.
+	    	2. Change their status.
 	    */
 	    
-	    //CREATE ASSIGNMENTS TABLE IF NOT EXIST
-	    query = "CREATE TABLE IF NOT EXISTS assignments(subject varchar(20),title varchar(50),duedate varchar(10),description varchar(200))";
-		ps =conn.prepareStatement(query);
-		ps.execute();
-		
-		//Add this assignment to the assignments table
-		query = String.format("INSERT INTO assignments values(\"%s\",\"%s\",\"%s\",\"%s\")",subject,title,duedate,description);
-		ps =conn.prepareStatement(query);
-		ps.execute();
-		
-		//Add a column to the "student" table and set status to not submitted.
-		query = String.format("ALTER TABLE student ADD COLUMN %s varchar(10) default \"NS\"",subject);
-		ps =conn.prepareStatement(query);
-		ps.execute();
+	    query = String.format("SELECT username,name FROM student WHERE %s = \"S\"",Test.subject);
+	    ps =conn.prepareStatement(query);
+		rs = ps.executeQuery(query);
+		int i=0;
+		while(rs.next())
+		{
+			Test.names[i]=rs.getString("name");
+			Test.unames[i]=rs.getString("username");
+			i++;
+			Test.a++;
+		}
 		
 		ps.close();
 		conn.close();
 	%>
+	
+<form action = "tempTeacherAssignments.jsp" method="post">	
+	<table>
+		<tr>
+			<th>Sr.No.</th>
+			<th>Student Name</th>
+			<th>Input</th>
+		</tr>
+		
+	<%
+		for (int j =0; j < i ; j++)
+		{
+	%>
+		<tr>
+			<td align="center"> <%=j+1%></td>
+			<td align="center"> <%=Test.names[j]%></td>
+			<td align="center">
+				<select name = "<%="input"+j %>">
+					<option value = "D">Done</option>
+					<option value = "R">Redo</option>
+					<option value = "NS">Not Submitted</option>
+				</select>
+			</td>
+		</tr>
+	<%       
+		}
+	%>
+		
+	</table>
+	<input type="submit" value="Update"/>
+</form>	
 </body>
 </html>

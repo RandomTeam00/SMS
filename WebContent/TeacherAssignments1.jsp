@@ -8,11 +8,12 @@
 <title>New Assignment</title>
 </head>
 <body>
-
+<object align = "right">	<a href = "SignOut.jsp">Sign Out</a> </object>
 	<form action = "TeacherAssignments2.jsp" method="post">
 		<pre>
-			Subject : <input type = "text" name = "subject"/>
+			Assignment ID : <input type = "text" name = "assignmentID"/>
 			Title : <input type = "text" name = "title"/>
+			Start Date : <input type = "date" name = "startdate"/>
 			Due Date(dd/mm/yyyy) : <input type = "date" name = "duedate"/>
 			Description :<textarea rows="5" cols="80" name="description1"></textarea>
 			Attachment : <input type = "file" name = "attachment">

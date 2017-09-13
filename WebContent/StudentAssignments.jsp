@@ -8,6 +8,7 @@
 <title>Student's Assignments</title>
 </head>
 <body>
+<object align = "right">	<a href = "SignOut.jsp">Sign Out</a> </object>
 	<center><h3><b>Assignment page css</b></h3></center>
 	<%@ page import = "java.sql.*" %>
 	<%
@@ -22,7 +23,7 @@
 		Test.currentAssignmentCount = 0;
 		System.out.println("Test.currentAssignmentCount : "+Test.currentAssignmentCount);
 		
-		String query = "select column_name from information_schema.columns where table_name='student'";
+		String query = "select column_name from information_schema.columns where table_name='studentAssignment'";
 		PreparedStatement ps =conn.prepareStatement(query);
 		ResultSet rs = ps.executeQuery(query);
 		
@@ -30,7 +31,7 @@
 		
 		while(rs.next())
 		{
-			String col = rs.getString("column_name");
+			String col = rs.getString("column_name");	
 			
 			if(!col.equals("username") && !col.equals("name"))
 			{
@@ -42,7 +43,7 @@
 		int i=0;
 		while(i<Test.currentAssignmentCount)
 		{
-			 query = "select "+Test.assignments[i]+" from student where username = \""+Test.userName+"\"";
+			 query = "select "+Test.assignments[i]+" from studentAssignment where username = \""+Test.userName+"\"";
 			 System.out.println("query : "+query);
 			 ps =conn.prepareStatement(query);
 			 rs = ps.executeQuery(query);

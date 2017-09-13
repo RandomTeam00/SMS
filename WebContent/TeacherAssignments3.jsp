@@ -8,9 +8,11 @@
 <title>Review Assignments</title>
 </head>
 <body>
+<object align = "right">	<a href = "SignOut.jsp">Sign Out</a> </object>
 	<center><h3><b>Review Assignments</b></h3></center>
 	<%@ page import = "java.sql.*" %>
 	
+	<a href = "http://localhost:8080/Mini/TeacherWelcome.jsp">HOME</a>
 	
 	<%
 		String driver = "com.mysql.jdbc.Driver";
@@ -20,29 +22,54 @@
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,username,password);
 
+		String filter = request.getParameter("filter");
+		System.out.println(filter);
+		if(filter == "")
+		{
+			filter = "D"; 
+		}
+		System.out.println("--> "+filter);
+		
+		int i=0;		
 		String query;
 	    PreparedStatement ps;
-	    ResultSet rs;
+	    ResultSet rs,rs1;
 			    
 	    /*
 	    	1. Look at all the submitted assignments.
 	    	2. Change their status.
 	    */
 	    
-	    query = String.format("SELECT username,name FROM student WHERE %s = \"S\"",Test.subject);
+	    query = String.format("SELECT assignmentID FROM assignments WHERE subject = \"%s\" AND status = \"Ongoing\"",Test.subject);
+	    System.out.println(query);
 	    ps =conn.prepareStatement(query);
 		rs = ps.executeQuery(query);
-		int i=0;
 		while(rs.next())
 		{
-			Test.names[i]=rs.getString("name");
-			Test.unames[i]=rs.getString("username");
-			i++;
-			Test.a++;
+			Test.assignmentID[i++]=rs.getString("assignmentID");
+			Test.subjectAssignmentCount++;
+			//System.out.println(Test.assignmentID[i-1]);
 		}
-		
+		int ji=0;
+	    for(int k=0;k<i;k++)
+	    {
+		    query = String.format("SELECT username,name FROM studentAssignment WHERE %s = \"%s\"",Test.assignmentID[k],filter);
+		    System.out.println(">"+query);
+		    ps =conn.prepareStatement(query);
+			rs1 = ps.executeQuery(query);
+			while(rs1.next())
+			{
+				Test.names[ji]=rs1.getString("name");
+				Test.unames[ji]=rs1.getString("username");
+				Test.assignmentIDs[ji]=Test.assignmentID[k];
+				//System.out.println("-->"+Test.names[ji]+" "+Test.unames[ji]+" "+Test.assignmentID[k]);
+				ji++;
+				Test.a++;				
+			}
+	    }
 		ps.close();
 		conn.close();
+		//System.out.println("---->"+ji);
 	%>
 	
 <form action = "tempTeacherAssignments.jsp" method="post">	
@@ -50,16 +77,18 @@
 		<tr>
 			<th>Sr.No.</th>
 			<th>Student Name</th>
+			<th>Assignment ID</th>
 			<th>Input</th>
 		</tr>
 		
 	<%
-		for (int j =0; j < i ; j++)
+		for (int j =0; j < ji ; j++)
 		{
 	%>
 		<tr>
 			<td align="center"> <%=j+1%></td>
 			<td align="center"> <%=Test.names[j]%></td>
+			<td align="center"> <%=Test.assignmentIDs[j]%></td>
 			<td align="center">
 				<select name = "<%="input"+j %>">
 					<option value = "D">Done</option>

@@ -31,7 +31,7 @@ Redirecting...
 		String val = request.getParameter("input"+i);
 		Test.tstatus[i]=val;
 		
-		query = "update student set "+Test.subject+" = \""+Test.tstatus[i]+"\" where username = \""+Test.unames[i]+"\"";
+		query = "update studentAssignment set "+Test.assignmentIDs[i]+" = \""+Test.tstatus[i]+"\" where username = \""+Test.unames[i]+"\"";
 		System.out.println(query);
 		ps =conn.prepareStatement(query);
 		ps.execute();
@@ -39,7 +39,7 @@ Redirecting...
 	}
 	
 	conn.close();
-	Thread.sleep(2000);
+	//Thread.sleep(2000);
 %>
 
 	<jsp:forward page="TeacherAssignments3.jsp"/>

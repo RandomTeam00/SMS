@@ -8,6 +8,7 @@
 <title>Teachers' Assignments</title>
 </head>
 <body>
+<object align = "right">	<a href = "SignOut.jsp">Sign Out</a> </object>
 	<center><h3><b>Add new Assignment</b></h3></center>
 	<%@ page import = "java.sql.*" %>
 	
@@ -24,29 +25,32 @@
 	    PreparedStatement ps;
 	    ResultSet rs;
 		
-		String subject = request.getParameter("subject"); 
+	    String assignmentID = request.getParameter("assignmentID");
 	    String title = request.getParameter("title");
+	    String startdate = request.getParameter("startdate");
 	    String duedate = request.getParameter("duedate"); 
 	    String description = request.getParameter("description");
+	    String status = "Ongoing";
 	    //SOMETHING TO DO WITH THE ATTACHED FILE
 	    
 	    /*
-	    	1. Add this assignmnet to the assignments table
-	    	2. Add a column to the "student" table and set status to not submitted.
+	    	1. Add this assignment to the assignments table
+	    	2. Add this assignment to the student_assignment table
+	    	3. Add a column to the "student" table and set status to not submitted.
 	    */
 	    
 	    //CREATE ASSIGNMENTS TABLE IF NOT EXIST
-	    query = "CREATE TABLE IF NOT EXISTS assignments(subject varchar(20),title varchar(50),duedate varchar(10),description varchar(200))";
+	    query = "CREATE TABLE IF NOT EXISTS assignments(assignmentID varchar(10), subject varchar(20),title varchar(50),startdate varchar(10), duedate varchar(10),description varchar(200),status varchar(10))";
 		ps =conn.prepareStatement(query);
 		ps.execute();
 		
 		//Add this assignment to the assignments table
-		query = String.format("INSERT INTO assignments values(\"%s\",\"%s\",\"%s\",\"%s\")",subject,title,duedate,description);
+		query = String.format("INSERT INTO assignments values(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\")",assignmentID,Test.subject,title,startdate,duedate,description,status);
 		ps =conn.prepareStatement(query);
 		ps.execute();
 		
 		//Add a column to the "student" table and set status to not submitted.
-		query = String.format("ALTER TABLE student ADD COLUMN %s varchar(10) default \"NS\"",subject);
+		query = String.format("ALTER TABLE studentAssignment ADD COLUMN %s varchar(10) default \"NS\"",assignmentID);
 		ps =conn.prepareStatement(query);
 		ps.execute();
 		

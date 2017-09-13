@@ -39,10 +39,16 @@
 			
 			if(designation.equalsIgnoreCase("student"))
 			{
-				query = String.format("insert into student values (\"%s\",\"%s\")",uname,name);
+				query = String.format("insert into student(username,name) values (\"%s\",\"%s\")",uname,name);
 			    System.out.println(query);
 			    PreparedStatement ps1 =conn.prepareStatement(query);
+			    ps1.execute();
+			    
+			    query = String.format("insert into studentAssignment(username,name) values (\"%s\",\"%s\")",uname,name);
+			    System.out.println(query);
+			    ps1 =conn.prepareStatement(query);
 				ps1.execute();
+				
 				ps1.close();
 			}
 			

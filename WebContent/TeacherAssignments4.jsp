@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>List of Assignments</title>
+<title>Delete Assignments</title>
 </head>
 <body>
 <object align = "right">	<a href = "SignOut.jsp">Sign Out</a> </object>
-	<center><h3><b>Recent Assignments</b></h3></center>
-	<%@ page import = "java.sql.*" %>
-	
+<%@ page import = "java.sql.*" %>
+ <%@ page import = "aA.Test" %>	
 	
 	<%
 		String driver = "com.mysql.jdbc.Driver";
@@ -19,8 +18,8 @@
 		String password = "123"; //password to db
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,username,password);
-
-		String query;
+		
+		String query,newStatus="";
 	    PreparedStatement ps;
 	    ResultSet rs;
 		int i=0;
@@ -32,18 +31,20 @@
 		int flag = 0;
 	    try
 	    {
-		    query = "SELECT * FROM assignments";
+		    query = String.format("SELECT * FROM assignments where subject = \"%s\" and status = \"Ongoing\"",Test.subject);
 		    ps = conn.prepareStatement(query);
 			rs = ps.executeQuery(query);
 			
 			while(rs.next())
 			{
-				Subjects[i] = rs.getString("subject");
+				Test.assignmentID1[i] = rs.getString("assignmentID");
+				//Subjects[i] = rs.getString("subject");
 				Titles[i] = rs.getString("title");
 				Duedates[i] = rs.getString("duedate");
 				Startdates[i] = rs.getString("startdate");
 				Status[i] = rs.getString("status");
 				i++;
+				Test.b++;
 			}
 	    }
 	    catch (Exception e)
@@ -54,15 +55,17 @@
 	    if(flag==0)
 	    {
 	 %> 
-	 
-	 <table>
+<form action = "tempTeacherAssignments2.jsp" method="post">	 
+<table>
 <tr>
 <th>Sr.No.</th>
-<th>Subject</th>
+<th>ID</th>
+<!--	<th>Subject</th>	-->
 <th>Title</th>
 <th>Start-Date</th>
 <th>Due-Date</th>
-<th>Status</th>
+<th>Current Status</th>
+<th>Change Status</th>
 </tr>
 	<%
 		for (int j =0; j < i ; j++)
@@ -71,18 +74,25 @@
 	%>
 		<tr>
 		<td> <%=j+1%></td>
-		<td> <%=Subjects[j]%></td>
+		<td> <%=Test.assignmentID1[j]%></td>
+<!--  	<td> <%=Subjects[j]%></td>	-->
 		<td><%=Titles[j]%> </td>
 		<td> <%=Startdates[j]%></td>
 		<td> <%=Duedates[j]%></td>
 		<td><%=Status[j]%> </td>
+		<td><select name = "<%="newStatus"+j %>">
+				    <option value="ongoing">Ongoing</option>
+				    <option value="complete">Complete</option>
+			</select>
+		</td>
 		</tr>
 		
 	<%       
 		}
 	   }
 	%>
-
 </table>
+	<input type="submit" value="Update"/>
+</form>
 </body>
 </html>

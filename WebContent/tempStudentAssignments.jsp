@@ -21,10 +21,7 @@ Redirecting...
 	Connection conn = DriverManager.getConnection(url,username,password);
 	
 	String query;
-	PreparedStatement ps;
-	
-	/*query = "update";
-	ps =conn.prepareStatement(query);*/
+	PreparedStatement ps;	
 	
 	for(int i=0;i<Test.currentAssignmentCount;i++)
 	{
@@ -32,7 +29,7 @@ Redirecting...
 		String val = request.getParameter("input"+i);
 		Test.status[i]=val;
 		
-		query = "update student set "+Test.assignments[i]+" = \""+Test.status[i]+"\" where username = \""+Test.userName+"\"";
+		query = "update studentAssignment set "+Test.assignments[i]+" = \""+Test.status[i]+"\" where username = \""+Test.userName+"\"";
 		System.out.println(query);
 		ps =conn.prepareStatement(query);
 		ps.execute();
@@ -40,7 +37,6 @@ Redirecting...
 	}
 	
 	conn.close();
-	//Thread.sleep(2000);
 %>
 
 	<jsp:forward page="StudentAssignments.jsp"/>

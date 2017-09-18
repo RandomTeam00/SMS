@@ -30,18 +30,20 @@ Redirecting...
 		System.out.println(request.getParameter("input"+i));
 		String val = request.getParameter("input"+i);
 		Test.tstatus[i]=val;
-		
-		query = "update studentAssignment set "+Test.assignmentIDs[i]+" = \""+Test.tstatus[i]+"\" where username = \""+Test.unames[i]+"\"";
-		System.out.println(query);
-		ps =conn.prepareStatement(query);
-		ps.execute();
-		ps.close();
+		if(Test.assignmentIDs[i] != null && Test.tstatus[i] != null && Test.unames[i]!= null)
+		{
+			query = "update studentAssignment set "+Test.assignmentIDs[i]+" = \""+Test.tstatus[i]+"\" where username = \""+Test.unames[i]+"\"";
+			System.out.println(query);
+			ps =conn.prepareStatement(query);
+			ps.execute();
+			ps.close();
+		}
 	}
-	
+	Test.initUpdateInfo();
 	conn.close();
 	//Thread.sleep(2000);
 %>
 
-	<jsp:forward page="TeacherAssignments3.jsp"/>
+	<jsp:forward page="tempTeacherAssignments3.jsp"/>
 </body>
 </html>

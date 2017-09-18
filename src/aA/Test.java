@@ -39,6 +39,17 @@ public class Test
 
 		}
 	}
+	
+	public static void initUpdateInfo()
+	{
+		for(int i=0;i<20;i++)
+		{
+			tstatus[i]="";
+			unames[i]="";
+			assignmentIDs[i]="";
+		}
+		a=0;
+	}
 }
 
 

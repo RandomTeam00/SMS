@@ -21,10 +21,10 @@
 		String password = "123"; //password to db
 		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url,username,password);
-
+		
 		String filter = request.getParameter("filter");
 		System.out.println(filter);
-		if(filter == "")
+		if(filter == null)
 		{
 			filter = "D"; 
 		}

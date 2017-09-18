@@ -7,6 +7,7 @@
 <title>Review Assignments</title>
 </head>
 <body>
+
 <object align = "right">
 <form action = "tempTeacherAssignments3.jsp" method = "post">
 	<select name = "filter">
@@ -22,7 +23,6 @@
 </form>
 </object>
 <br><br/>
-<object align = "left"><jsp:include page="TeacherAssignments3.jsp"/></object>
-
+ 	<object align = "left"><jsp:include page="TeacherAssignments3.jsp"/></object>
 </body>
 </html>
